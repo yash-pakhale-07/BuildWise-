@@ -1,0 +1,16 @@
+{
+  "name": "ideaforge-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm --prefix apps/api run dev",
+    "dev:web": "npm --prefix apps/web run dev",
+    "build:shared": "npm --prefix packages/shared run build",
+    "build:api": "npm --prefix apps/api run build",
+    "build:web": "npm --prefix apps/web run build"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "app": {
+    "title": "IdeaForge",
+    "tagline": "AI Research & Innovation Platform"
+  },
+  "sidebar": {
+    "overview": "Overview",
+    "deepsearch": "Deep Research",
+    "clustering": "Literature Clustering",
+    "signals": "Research Signals",
+    "projecthub": "Project Hub",
+    "workspace": "Workspace",
+    "github": "GitHub",
+    "agent": "AI Agent",
+    "dashboard": "Dashboard",
+    "language": "Language",
+    "settings": "Settings"
+  },
+  "groups": {
+    "workspace": "Workspace",
+    "planning": "Planning",
+    "execution": "Execution",
+    "account": "Account"
+  },
+  "buttons": {
+    "validateNovelty": "Validate Novelty",
+    "generateArchitecture": "Generate Architecture",
+    "searchPapers": "Search Papers",
+    "createPullRequest": "Create Pull Request",
+    "exportPdf": "Export PDF",
+    "continue": "Continue",
+    "back": "Back",
+    "send": "Send",
+    "newIdea": "New Research Idea",
+    "viewPlan": "Project Hub",
+    "scaffoldRepo": "Scaffold Repo on GitHub",
+    "openProjectHub": "Open Project Hub"
+  },
+  "labels": {
+    "noveltyScore": "Novelty Score",
+    "demandScore": "IEEE Publication Demand",
+    "existingSolutions": "Existing Solutions",
+    "academicApproaches": "Academic Approaches",
+    "openSourceImplementations": "Open-Source Implementations",
+    "gaps": "Identified Gaps",
+    "mockedMode": "Mocked Mode",
+    "ieeeGrounded": "IEEE Grounded",
+    "active": "Active",
+    "installed": "Installed",
+    "done": "Done",
+    "inProgress": "In Progress",
+    "pending": "Pending"
+  },
+  "content": {
+    "foodWasteIdea": {
+      "title": "Build an AI Solution to Reduce Food Waste in College Hostels",
+      "shortTitle": "Food Waste Reduction",
+      "description": "Develop an AI-powered system that predicts food demand, monitors wastage, and optimizes meal preparation in college hostels.",
+      "feasibility": "High practical feasibility. 28% growth in IEEE IoT smart bin literature. Identified gap: lack of integrated mess-count prediction with real-time plate-waste detection.",
+      "gapSummary": "No existing system combines hostel mess-count prediction with real-time plate-waste detection."
+    },
+    "satAiIdea": {
+      "title": "Real-time Satellite Imagery Compression Microservice Using Onboard FPGA Edge Neural Codecs",
+      "shortTitle": "Satellite AI Compression",
+      "description": "Deploy FPGA-accelerated neural image codecs to achieve >15:1 data compression on CubeSats.",
+      "feasibility": "High student research innovation potential. 34% growth in related IEEE paper submissions over the last 12 months.",
+      "gapSummary": "Absence of an open-source automated HIL benchmark framework for dynamic model switching."
+    }
+  },
+  "validation": {
+    "completed": "Validation Completed",
+    "success": "IEEE Grounded",
+    "feasibilityHeader": "Feasibility & Market Benchmark",
+    "evaluatingSignal": "Evaluating Signal..."
+  },
+  "research": {
+    "paperSearch": {
+      "title": "Research Papers"
+    },
+    "clustering": {
+      "title": "Literature Clustering"
+    },
+    "signals": {
+      "title": "Research Signals"
+    }
+  },
+  "project": {
+    "github": {
+      "title": "GitHub Integration"
+    }
+  },
+  "overview": {
+    "subtitle": "Transform raw research hypotheses into verified IEEE-grounded literature clusters, architecture specifications, and scaffolded GitHub pull requests.",
+    "inputLabel": "Research Hypothesis or Problem Statement",
+    "inputPlaceholder": "Enter your research hypothesis or technical idea...",
+    "feasibilityHeader": "Feasibility & Market Benchmark"
+  },
+  "deepsearch": {
+    "title": "IEEE Xplore & Multi-Source Academic DeepSearch",
+    "subtitle": "Real-time aggregated results from IEEE Xplore, arXiv, GitHub repositories, and developer forums with verified DOIs.",
+    "placeholder": "Search IEEE papers, DOIs, GitHub repos, or research keywords...",
+    "filterAll": "All Sources",
+    "filterIEEE": "IEEE Xplore",
+    "filterGitHub": "GitHub Repos",
+    "filterWeb": "Web / Forums"
+  },
+  "clustering": {
+    "title": "Synthesized Multi-Source Research Clusters",
+    "subtitle": "Automated classification into Existing Solutions, Academic Benchmarks, Open Source Software, and Unresolved Research Gaps.",
+    "nestedReferences": "Nested References & Papers"
+  },
+  "signals": {
+    "title": "Research Trend & Innovation Signals",
+    "subtitle": "Live academic velocity tracking, IEEE submission growth signals, and market demand indicators.",
+    "noveltyGauge": "Global Novelty Signal Score",
+    "demandGauge": "IEEE Academic Demand Score",
+    "trajectories": "Key Research Signal Trajectories"
+  },
+  "plan": {
+    "title": "Generated System Architecture & Milestones",
+    "subtitle": "Complete full-stack blueprint, dataset references, and GitHub execution roadmap.",
+    "architectureNodes": "System Architecture Nodes",
+    "dataFlow": "Data Flow Narrative",
+    "techStack": "Recommended Tech Stack",
+    "milestoneRoadmap": "Milestone Execution Roadmap",
+    "datasets": "Recommended Research Datasets",
+    "repos": "Open Source Baseline Repositories"
+  },
+  "github": {
+    "title": "Scaffolded Repository & Automated Pull Requests",
+    "subtitle": "Auto-generated codebase structure, starter pull request, and milestone issues with embedded IEEE literature comments.",
+    "repoLabel": "Target Repository",
+    "prLabel": "Starter Pull Request",
+    "issuesHeader": "Automated GitHub Milestone Issues"
+  },
+  "agent": {
+    "title": "AI Research Assistant",
+    "subtitle": "Live interaction stream and research specification Q&A agent.",
+    "placeholder": "Ask a question about your IEEE research plan or milestones...",
+    "activeBadge": "Agent Active"
+  },
+  "dashboard": {
+    "title": "IdeaForge Innovation Dashboard",
+    "subtitle": "Overview of active research ideas, generated IEEE specifications, scaffolded GitHub repos, and agent activity.",
+    "statIdeas": "Active Research Ideas",
+    "statPlans": "Generated Project Plans",
+    "statRepos": "Scaffolded Repositories",
+    "pipelineHeader": "Research Ideas Pipeline",
+    "activeRepoHeader": "Active GitHub Repository",
+    "agentActivityHeader": "Recent Telegram Agent Activity"
+  },
+  "language": {
+    "title": "Multilingual Research & Output Language",
+    "subtitle": "Select your preferred research output language (English, Hindi, Marathi). iNSIGHTS Layer 2 automatically translates research specs, UI chrome, and gap summaries."
+  },
+  "settings": {
+    "title": "System Settings & API Integrations",
+    "subtitle": "Manage sponsor API keys, mock mode toggles, and notification preferences.",
+    "execMode": "Frontend Execution Mode",
+    "apiIntegrations": "Layer 2 & Sponsor API Integrations"
+  }
+}

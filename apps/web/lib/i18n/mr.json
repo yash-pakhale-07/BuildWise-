@@ -1,0 +1,31 @@
+{
+  "ui": {
+    "app.title": "आयडियाफोर्ज",
+    "app.tagline": "iNSIGHTS संशोधन आणि नाविन्यता कोपायलट",
+    "sidebar.overview": "आढावा",
+    "sidebar.deepsearch": "डीपसर्च",
+    "sidebar.clustering": "नॉलेज क्लस्टरिंग",
+    "sidebar.signals": "रिअल-टाइम सिग्नल्स",
+    "sidebar.projecthub": "प्रोजेक्ट हब",
+    "sidebar.workspace": "रिसर्च वर्कस्पेस",
+    "sidebar.github": "गिटहब",
+    "sidebar.agent": "एआय एजंट",
+    "sidebar.dashboard": "डॅशबोर्ड",
+    "sidebar.language": "भाषा",
+    "sidebar.settings": "सेटिंग्ज",
+    "action.scaffoldRepo": "हा रेपो स्कॅफोल्ड करा",
+    "action.startResearch": "संशोधन सुरू करा",
+    "action.validateNovelty": "नाविन्यतेचे मूल्यमापन करा",
+    "label.noveltyScore": "नाविन्य गुण",
+    "label.demandScore": "आयईईई प्रकाशन मागणी",
+    "label.existingSolutions": "विद्यमान उपाय",
+    "label.academicApproaches": "शैक्षणिक दृष्टिकोन",
+    "label.openSourceImplementations": "ओपन-सोर्स अंमलबजावणी",
+    "label.gaps": "आढळलेली तफावत"
+  },
+  "content": {
+    "foodWasteIdea.title": "महाविद्यालयीन वसतिगृहांमध्ये अन्नाची नासाडी कमी करण्यासाठी एआय उपाय तयार करा",
+    "foodWasteIdea.feasibility": "उच्च व्यावहारिक उपयोगिता. आयईईई आयओटी स्मार्ट बिन साहित्यात २८% वाढ. आढळलेली तफावत: रिअल-टाइम प्लेट-वेस्ट शोधासोबत मेस-काउंट अंदाजाचा अभाव.",
+    "foodWasteIdea.gapSummary": "कोणतीही विद्यमान प्रणाली वसतिगृह मेस-काउंट अंदाजाला रिअल-टाइम प्लेट-वेस्ट शोधासोबत जोडत नाही."
+  }
+}

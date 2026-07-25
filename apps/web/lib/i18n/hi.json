@@ -1,0 +1,31 @@
+{
+  "ui": {
+    "app.title": "आईडियाफोर्ज",
+    "app.tagline": "iNSIGHTS अनुसंधान एवं नवाचार कोपायलट",
+    "sidebar.overview": "अवलोकन",
+    "sidebar.deepsearch": "डीपसर्च",
+    "sidebar.clustering": "नॉलेज क्लस्टरिंग",
+    "sidebar.signals": "रीयल-टाइम सिग्नल्स",
+    "sidebar.projecthub": "प्रोजेक्ट हब",
+    "sidebar.workspace": "रिसर्च वर्कस्पेस",
+    "sidebar.github": "गिटहब",
+    "sidebar.agent": "एआई एजेंट",
+    "sidebar.dashboard": "डैशबोर्ड",
+    "sidebar.language": "भाषा",
+    "sidebar.settings": "सेटिंग्स",
+    "action.scaffoldRepo": "यह रेपो स्कैफोल्ड करें",
+    "action.startResearch": "रिसर्च शुरू करें",
+    "action.validateNovelty": "नवीनता का मूल्यांकन करें",
+    "label.noveltyScore": "नवीनता स्कोर",
+    "label.demandScore": "आईईईई प्रकाशन मांग",
+    "label.existingSolutions": "मौजूदा समाधान",
+    "label.academicApproaches": "शैक्षणिक दृष्टिकोण",
+    "label.openSourceImplementations": "ओपन-सोर्स कार्यान्वयन",
+    "label.gaps": "पहचाने गए अंतराल"
+  },
+  "content": {
+    "foodWasteIdea.title": "कॉलेज हॉस्टलों में भोजन की बर्बादी कम करने के लिए एआई समाधान बनाएं",
+    "foodWasteIdea.feasibility": "उच्च व्यावहारिक व्यवहार्यता। आईईईई आईओटी स्मार्ट बिन साहित्य में 28% की वृद्धि। पहचाना गया अंतराल: रीयल-टाइम प्लेट-वेस्ट डिटेक्शन के साथ एकीकृत मेस-काउंट पूर्वानुमान का अभाव।",
+    "foodWasteIdea.gapSummary": "कोई भी मौजूदा प्रणाली हॉस्टल मेस-काउंट पूर्वानुमान को रीयल-टाइम प्लेट-वेस्ट डिटेक्शन के साथ नहीं जोड़ती।"
+  }
+}

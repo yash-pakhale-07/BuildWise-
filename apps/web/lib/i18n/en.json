@@ -1,0 +1,31 @@
+{
+  "ui": {
+    "app.title": "IdeaForge",
+    "app.tagline": "iNSIGHTS Research & Innovation Copilot",
+    "sidebar.overview": "Overview",
+    "sidebar.deepsearch": "DeepSearch",
+    "sidebar.clustering": "Knowledge Clustering",
+    "sidebar.signals": "Real-time Signals",
+    "sidebar.projecthub": "Project HUB",
+    "sidebar.workspace": "Research Workspace",
+    "sidebar.github": "GitHub",
+    "sidebar.agent": "AI Agent",
+    "sidebar.dashboard": "Dashboard",
+    "sidebar.language": "Language",
+    "sidebar.settings": "Settings",
+    "action.scaffoldRepo": "Scaffold this repo",
+    "action.startResearch": "Start Research",
+    "action.validateNovelty": "Validate Novelty",
+    "label.noveltyScore": "Novelty Score",
+    "label.demandScore": "IEEE Publication Demand",
+    "label.existingSolutions": "Existing Solutions",
+    "label.academicApproaches": "Academic Approaches",
+    "label.openSourceImplementations": "Open-Source Implementations",
+    "label.gaps": "Identified Gaps"
+  },
+  "content": {
+    "foodWasteIdea.title": "Build an AI solution to reduce food waste in college hostels",
+    "foodWasteIdea.feasibility": "High practical feasibility. 28% growth in IEEE IoT smart bin literature. Identified gap: lack of integrated mess-count prediction with real-time plate-waste detection.",
+    "foodWasteIdea.gapSummary": "No existing system combines hostel mess-count prediction with real-time plate-waste detection."
+  }
+}
