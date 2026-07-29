@@ -3,6 +3,8 @@ import cors from "@fastify/cors";
 import dotenv from "dotenv";
 import { initDb } from "./db/db";
 import { apiRoutes } from "./routes/api";
+import { authRoutes } from "./routes/auth";
+
 
 dotenv.config();
 
@@ -18,6 +20,7 @@ async function startServer() {
 
   await initDb();
   await server.register(apiRoutes);
+  await server.register(authRoutes);
 
   const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
   
