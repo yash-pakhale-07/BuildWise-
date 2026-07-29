@@ -1,4 +1,4 @@
-import { SearchResult, Cluster, ProjectPlan, TrendSignal } from "@ideaforge/shared";
+import { SearchResult, Cluster, ProjectPlan, TrendSignal } from "@buildwise/shared";
 import { InsightsLayer2Client } from "../clients/insightsLayer2";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

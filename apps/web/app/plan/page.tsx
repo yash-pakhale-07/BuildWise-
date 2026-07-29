@@ -2,12 +2,13 @@
 
 import { mockPlansByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
+import { ProjectPlan, TechStackChoice, MilestoneItem, DatasetItem, RepoItem } from "@buildwise/shared";
 import { Rocket, Cpu, ListChecks, Database, Github, Code2, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 export default function ProjectHubPage() {
   const { t } = useLanguage();
-  const plan = mockPlansByIdea["idea-food-waste-2026"];
+  const plan: ProjectPlan = mockPlansByIdea["idea-food-waste-2026"];
 
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
@@ -46,7 +47,7 @@ export default function ProjectHubPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-3 pt-2">
-          {plan.architecture.diagramNodes?.map((node, idx) => (
+          {plan.architecture.diagramNodes?.map((node: { id: string; label: string; type: string }, idx: number) => (
             <div key={idx} className="glass-card p-4 rounded-xl text-center space-y-2 border-l-4 border-l-primary">
               <span className="text-[10px] uppercase font-bold text-accent tracking-wider block">
                 {node.type}
@@ -76,7 +77,7 @@ export default function ProjectHubPage() {
           </h3>
 
           <div className="space-y-3">
-            {plan.techStack.map((row, idx) => (
+            {plan.techStack.map((row: TechStackChoice, idx: number) => (
               <div key={idx} className="glass-card p-4 rounded-xl space-y-1">
                 <div className="flex items-center justify-between text-xs font-bold">
                   <span className="text-accent">{row.layer}</span>
@@ -100,7 +101,7 @@ export default function ProjectHubPage() {
           </h3>
 
           <div className="space-y-3">
-            {plan.milestones.map((m, idx) => (
+            {plan.milestones.map((m: MilestoneItem, idx: number) => (
               <div key={idx} className="glass-card p-4 rounded-xl flex items-start justify-between gap-4">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
@@ -129,7 +130,7 @@ export default function ProjectHubPage() {
           </h3>
 
           <div className="space-y-3">
-            {plan.datasets.map((ds, idx) => (
+            {plan.datasets.map((ds: DatasetItem, idx: number) => (
               <div key={idx} className="glass-card p-4 rounded-xl space-y-1">
                 <a href={ds.url} target="_blank" rel="noreferrer" className="text-xs font-bold text-accent hover:underline flex items-center justify-between">
                   <span>{ds.name}</span>
@@ -148,7 +149,7 @@ export default function ProjectHubPage() {
           </h3>
 
           <div className="space-y-3">
-            {plan.repos.map((repo, idx) => (
+            {plan.repos.map((repo: RepoItem, idx: number) => (
               <div key={idx} className="glass-card p-4 rounded-xl space-y-1">
                 <a href={repo.url} target="_blank" rel="noreferrer" className="text-xs font-bold text-fg hover:underline flex items-center justify-between">
                   <span>{repo.name}</span>

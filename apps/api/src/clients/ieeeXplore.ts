@@ -1,4 +1,4 @@
-import { IEEEPaper } from "@ideaforge/shared";
+import { IEEEPaper } from "@buildwise/shared";
 
 export interface IEEEXploreClient {
   searchPapers(query: string, maxResults?: number): Promise<IEEEPaper[]>;

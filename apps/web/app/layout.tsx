@@ -3,8 +3,8 @@ import { Providers } from "./providers";
 import { Sidebar } from "../components/Sidebar";
 
 export const metadata = {
-  title: "IdeaForge — AI Research & Innovation Copilot for Students",
-  description: "Automate student research validation, IEEE academic literature clustering, architecture planning, and GitHub repository scaffolding.",
+  title: "BuildWise — AI Research & Innovation Platform",
+  description: "Transform raw project ideas into complete research-backed development plans. AI-powered IEEE literature analysis, architecture generation, and GitHub scaffolding.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

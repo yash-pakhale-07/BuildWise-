@@ -1,4 +1,4 @@
-import { ProjectPlan } from "@ideaforge/shared";
+import { ProjectPlan } from "@buildwise/shared";
 
 export const mockPlansByIdea: Record<string, ProjectPlan> = {
   "idea-food-waste-2026": {
@@ -25,10 +25,10 @@ export const mockPlansByIdea: Record<string, ProjectPlan> = {
       { layer: "Persistence", choice: "PostgreSQL 16", why: "Relational schema storing daily meal logs, attendance, and bin load weights." },
     ],
     milestones: [
-      { id: "m-fw-1", title: "Scaffold Core API Monorepo & Postgres Schema", dueInDays: 3, dueDate: "2026-07-28", status: "done", githubIssueUrl: "https://github.com/ideaforge-org/student-research-food-waste/issues/1" },
-      { id: "m-fw-2", title: "Train LSTM Hostel Mess Attendance Forecasting Model", dueInDays: 7, dueDate: "2026-08-01", status: "in_progress", githubIssueUrl: "https://github.com/ideaforge-org/student-research-food-waste/issues/2" },
-      { id: "m-fw-3", title: "Deploy ESP32-CAM Smart Bin Load Cell Telemetry Firmware", dueInDays: 14, dueDate: "2026-08-08", status: "pending", githubIssueUrl: "https://github.com/ideaforge-org/student-research-food-waste/issues/3" },
-      { id: "m-fw-4", title: "Integrate Automated GitHub App Repo & PR Scaffolder", dueInDays: 21, dueDate: "2026-08-15", status: "pending", githubIssueUrl: "https://github.com/ideaforge-org/student-research-food-waste/issues/4" },
+      { id: "m-fw-1", title: "Scaffold Core API Monorepo & Postgres Schema", dueInDays: 3, dueDate: "2026-07-28", status: "done", githubIssueUrl: "https://github.com/buildwise-org/student-research-food-waste/issues/1" },
+      { id: "m-fw-2", title: "Train LSTM Hostel Mess Attendance Forecasting Model", dueInDays: 7, dueDate: "2026-08-01", status: "in_progress", githubIssueUrl: "https://github.com/buildwise-org/student-research-food-waste/issues/2" },
+      { id: "m-fw-3", title: "Deploy ESP32-CAM Smart Bin Load Cell Telemetry Firmware", dueInDays: 14, dueDate: "2026-08-08", status: "pending", githubIssueUrl: "https://github.com/buildwise-org/student-research-food-waste/issues/3" },
+      { id: "m-fw-4", title: "Integrate Automated GitHub App Repo & PR Scaffolder", dueInDays: 21, dueDate: "2026-08-15", status: "pending", githubIssueUrl: "https://github.com/buildwise-org/student-research-food-waste/issues/4" },
     ],
     datasets: [
       { name: "IEEE Open Dataset - Smart Bin Food Waste Logs", url: "https://ieeexplore.ieee.org/browse/sample-datasets", description: "Standardized cafeteria load-cell & image benchmarks." },

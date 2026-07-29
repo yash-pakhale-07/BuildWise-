@@ -2,12 +2,13 @@
 
 import { mockClustersByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
+import { Cluster, SearchResult } from "@buildwise/shared";
 import { BookOpen, ExternalLink, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function ResearchWorkspaceAggregatorPage() {
   const { t } = useLanguage();
-  const clusters = mockClustersByIdea["idea-food-waste-2026"] || [];
+  const clusters: Cluster[] = mockClustersByIdea["idea-food-waste-2026"] || [];
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
@@ -37,14 +38,14 @@ export default function ResearchWorkspaceAggregatorPage() {
 
       {/* Aggregated Cluster Summaries */}
       <div className="space-y-4">
-        {clusters.map((c) => {
+        {clusters.map((c: Cluster) => {
           const isGap = c.type === "gaps";
           const summaryText = isGap ? t("content.foodWasteIdea.gapSummary") : c.summary;
           const labelKey = `labels.${c.type === "existing_solutions" ? "existingSolutions" : c.type === "academic" ? "academicApproaches" : c.type === "oss" ? "openSourceImplementations" : "gaps"}`;
           const localizedLabel = t(labelKey);
 
           return (
-            <div key={c.id} className="glass-panel p-6 rounded-2xl space-y-3">
+            <div key={c.id || c.type} className="glass-panel p-6 rounded-2xl space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-accent border border-accent/30 bg-accent-muted px-3 py-1 rounded-full">
                   {localizedLabel}
@@ -59,7 +60,7 @@ export default function ResearchWorkspaceAggregatorPage() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                {c.sources?.map((src, idx) => (
+                {c.sources?.map((src: SearchResult, idx: number) => (
                   <div key={idx} className="glass-card p-3 rounded-xl space-y-1">
                     <a href={src.url} target="_blank" rel="noreferrer" className="text-xs font-bold text-fg hover:text-accent flex items-center justify-between">
                       <span className="line-clamp-1">{src.title}</span>

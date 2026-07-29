@@ -1,4 +1,4 @@
-# IdeaForge TODO & Assumptions Log
+# BuildWise TODO & Assumptions Log
 
 ## Blocker / Credential Statuses
 - BLOCKED: waiting on INSIGHTS_LAYER2_API_KEY credential — using mock client in `apps/api/src/mocks/insightsLayer2.mock.ts`

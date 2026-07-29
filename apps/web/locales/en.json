@@ -1,6 +1,6 @@
 {
   "app": {
-    "title": "IdeaForge",
+    "title": "BuildWise",
     "tagline": "AI Research & Innovation Platform"
   },
   "sidebar": {
@@ -140,7 +140,7 @@
     "activeBadge": "Agent Active"
   },
   "dashboard": {
-    "title": "IdeaForge Innovation Dashboard",
+    "title": "BuildWise Innovation Dashboard",
     "subtitle": "Overview of active research ideas, generated IEEE specifications, scaffolded GitHub repos, and agent activity.",
     "statIdeas": "Active Research Ideas",
     "statPlans": "Generated Project Plans",

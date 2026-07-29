@@ -1,4 +1,4 @@
-import { SearchResult, Cluster, ProjectPlan, TrendSignal } from "@ideaforge/shared";
+import { SearchResult, Cluster, ProjectPlan, TrendSignal } from "@buildwise/shared";
 
 export interface InsightsLayer2Client {
   deepSearch(query: string, sources?: string[]): Promise<SearchResult[]>;

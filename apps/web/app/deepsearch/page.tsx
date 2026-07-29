@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { mockClustersByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
-import { SearchResult } from "@ideaforge/shared";
+import { SearchResult, Cluster } from "@buildwise/shared";
 import { Search, ExternalLink, Filter } from "lucide-react";
 
 export default function DeepSearchPage() {
@@ -11,10 +11,10 @@ export default function DeepSearchPage() {
   const [query, setQuery] = useState("College Hostel Food Waste AI");
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
-  const clusters = mockClustersByIdea["idea-food-waste-2026"] || [];
-  const allSources: SearchResult[] = clusters.flatMap((c) => c.sources || []);
+  const clusters: Cluster[] = mockClustersByIdea["idea-food-waste-2026"] || [];
+  const allSources: SearchResult[] = clusters.flatMap((c: Cluster) => c.sources || []);
 
-  const filteredSources = allSources.filter((src) => {
+  const filteredSources: SearchResult[] = allSources.filter((src: SearchResult) => {
     if (activeFilter === "all") return true;
     return src.sourceType === activeFilter;
   });
@@ -88,7 +88,7 @@ export default function DeepSearchPage() {
 
       {/* Search Results List */}
       <div className="space-y-3">
-        {filteredSources.map((src, idx) => (
+        {filteredSources.map((src: SearchResult, idx: number) => (
           <div key={idx} className="glass-card p-5 rounded-xl space-y-2 border-l-4 border-l-accent hover:border-accent transition-colors">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-2">

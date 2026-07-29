@@ -23,7 +23,7 @@ async function startServer() {
   
   try {
     await server.listen({ port: PORT, host: "0.0.0.0" });
-    console.log(`🚀 IdeaForge Fastify API running on http://localhost:${PORT}`);
+    console.log(`🚀 BuildWise API running on http://localhost:${PORT}`);
   } catch (err) {
     server.log.error(err);
     process.exit(1);

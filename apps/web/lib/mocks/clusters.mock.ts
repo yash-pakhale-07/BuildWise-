@@ -1,4 +1,4 @@
-import { Cluster } from "@ideaforge/shared";
+import { Cluster } from "@buildwise/shared";
 
 export const mockClustersByIdea: Record<string, Cluster[]> = {
   "idea-food-waste-2026": [

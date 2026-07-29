@@ -2,31 +2,32 @@
 
 import { mockAgentActivity } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
+import { AgentInteraction } from "@buildwise/shared";
 import { Bot, Send, User } from "lucide-react";
 import { useState } from "react";
 
 export default function AgentTranscriptPage() {
   const { t } = useLanguage();
-  const [messages, setMessages] = useState(mockAgentActivity);
+  const [messages, setMessages] = useState<AgentInteraction[]>(mockAgentActivity);
   const [inputText, setInputText] = useState("");
 
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim()) return;
 
-    const userMsg = {
+    const userMsg: AgentInteraction = {
       id: `msg-${Date.now()}`,
-      channel: "telegram" as const,
+      channel: "telegram",
       message: inputText,
-      direction: "inbound" as const,
+      direction: "inbound",
       createdAt: new Date().toISOString(),
     };
 
-    const replyMsg = {
+    const replyMsg: AgentInteraction = {
       id: `msg-${Date.now() + 1}`,
-      channel: "telegram" as const,
-      message: `💡 IdeaForge Agent: Received query "${inputText}". Cited IEEE reference: IEEE IoT Journal (DOI: 10.1109/JIOT.2023.3298101). Target mess attendance forecasting error is sub-5%.`,
-      direction: "outbound" as const,
+      channel: "telegram",
+      message: `💡 BuildWise Agent: Received query "${inputText}". Cited IEEE reference: IEEE IoT Journal (DOI: 10.1109/JIOT.2023.3298101). Target mess attendance forecasting error is sub-5%.`,
+      direction: "outbound",
       createdAt: new Date().toISOString(),
     };
 
@@ -56,7 +57,7 @@ export default function AgentTranscriptPage() {
 
       {/* Chat Messages Log */}
       <div className="glass-panel flex-1 p-6 rounded-2xl overflow-y-auto space-y-4">
-        {messages.map((msg) => {
+        {messages.map((msg: AgentInteraction) => {
           const isInbound = msg.direction === "inbound";
           return (
             <div

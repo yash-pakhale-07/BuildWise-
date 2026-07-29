@@ -1,4 +1,4 @@
-import { IEEEPaper } from "@ideaforge/shared";
+import { IEEEPaper } from "@buildwise/shared";
 import { IEEEXploreClient } from "../clients/ieeeXplore";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

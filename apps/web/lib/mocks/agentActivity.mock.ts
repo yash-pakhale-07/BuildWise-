@@ -1,4 +1,4 @@
-import { AgentInteraction } from "@ideaforge/shared";
+import { AgentInteraction } from "@buildwise/shared";
 
 export const mockAgentActivity: AgentInteraction[] = [
   {
@@ -11,7 +11,7 @@ export const mockAgentActivity: AgentInteraction[] = [
   {
     id: "inter-2",
     channel: "telegram",
-    message: "👋 Welcome to IdeaForge Research Copilot! Send me your research queries or ask questions about your active project plan specification.",
+    message: "👋 Welcome to BuildWise Research Copilot! Send me your research queries or ask questions about your active project plan specification.",
     direction: "outbound",
     createdAt: "2026-07-24T10:00:02Z",
   },

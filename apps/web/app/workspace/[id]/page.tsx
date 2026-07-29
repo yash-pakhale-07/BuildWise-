@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Cluster, SearchResult } from "@ideaforge/shared";
+import { Cluster, SearchResult } from "@buildwise/shared";
 import { BookOpen, Github, Globe, Sparkles, ArrowRight, Layers, ExternalLink, UserCheck, AlertTriangle } from "lucide-react";
 
 export default function WorkspacePage() {

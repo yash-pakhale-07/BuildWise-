@@ -1,4 +1,4 @@
-import { MilestoneItem } from "@ideaforge/shared";
+import { MilestoneItem } from "@buildwise/shared";
 import { GitHubAppClient } from "../clients/githubApp";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -8,7 +8,7 @@ export class MockGitHubAppClient implements GitHubAppClient {
     await sleep(1000);
     const slug = planId.slice(0, 8);
     return {
-      repoUrl: `https://github.com/ideaforge-org/student-research-${slug}`,
+      repoUrl: `https://github.com/buildwise-org/student-research-${slug}`,
     };
   }
 

@@ -1,7 +1,7 @@
 import { getInsightsLayer2Client } from "../clients/insightsLayer2";
 import { getResearchStatus } from "./research";
 import { getDbPool, memoryDb, isDbConnected } from "../db/db";
-import { ProjectPlan } from "@ideaforge/shared";
+import { ProjectPlan } from "@buildwise/shared";
 import { randomUUID } from "crypto";
 
 export async function generatePlanForIdea(ideaId: string): Promise<ProjectPlan> {

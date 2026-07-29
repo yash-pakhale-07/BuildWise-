@@ -1,5 +1,5 @@
 {
-  "name": "@ideaforge/shared",
+  "name": "@buildwise/shared",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

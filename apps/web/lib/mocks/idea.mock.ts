@@ -1,4 +1,4 @@
-import { Idea } from "@ideaforge/shared";
+import { Idea } from "@buildwise/shared";
 
 export const mockIdea: Idea = {
   id: "idea-sat-ai-2026",

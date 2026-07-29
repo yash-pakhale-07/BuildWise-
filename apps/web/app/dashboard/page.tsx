@@ -2,6 +2,7 @@
 
 import { mockIdeas, mockGitHubByIdea, mockAgentActivity } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
+import { Idea, AgentInteraction } from "@buildwise/shared";
 import { LayoutDashboard, Sparkles, Github, GitPullRequest, ArrowRight, Activity, Clock, FileText } from "lucide-react";
 import Link from "next/link";
 
@@ -72,7 +73,7 @@ export default function DashboardPage() {
         </h3>
 
         <div className="space-y-3">
-          {mockIdeas.map((idea) => {
+          {mockIdeas.map((idea: Idea) => {
             const isFoodWaste = idea.id === "idea-food-waste-2026";
             const textToDisplay = isFoodWaste ? t("content.foodWasteIdea.title") : idea.rawText;
 
@@ -148,7 +149,7 @@ export default function DashboardPage() {
           </h3>
 
           <div className="space-y-2">
-            {mockAgentActivity.slice(-3).map((inter) => (
+            {mockAgentActivity.slice(-3).map((inter: AgentInteraction) => (
               <div key={inter.id} className="glass-card p-3 rounded-xl space-y-1 text-xs">
                 <div className="flex items-center justify-between text-[10px]">
                   <span className="font-bold text-accent uppercase tracking-wider">{inter.channel} ({inter.direction})</span>

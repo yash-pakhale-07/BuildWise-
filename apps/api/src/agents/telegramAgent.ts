@@ -30,9 +30,9 @@ export async function handleTelegramWebhook(payload: any) {
   // Answer Q&A using latest project plan spec or research grounding
   let responseMessage = "";
   if (messageText.startsWith("/start")) {
-    responseMessage = "👋 Welcome to **IdeaForge Research Copilot**! Send me your research queries or ask questions about your active project plan specification.";
+    responseMessage = "👋 Welcome to **BuildWise Research Copilot**! Send me your research queries or ask questions about your active project plan specification.";
   } else {
-    responseMessage = `💡 **IdeaForge Q&A Response**:\nRegarding your query "${messageText.slice(0, 50)}...":\nBased on your active IEEE-grounded project specification (IEEE Trans. Geoscience DOI: 10.1109/TGRS.2022.3190821), recommended next step is running sub-vector quantization tests on your edge microcontroller node before your milestone deadline in 3 days.`;
+    responseMessage = `💡 **BuildWise Q&A Response**:\nRegarding your query "${messageText.slice(0, 50)}...":\nBased on your active IEEE-grounded project specification (IEEE Trans. Geoscience DOI: 10.1109/TGRS.2022.3190821), recommended next step is running sub-vector quantization tests on your edge microcontroller node before your milestone deadline in 3 days.`;
   }
 
   // Record outbound interaction

@@ -1,7 +1,7 @@
 import { getInsightsLayer2Client } from "../clients/insightsLayer2";
 import { getIEEEXploreClient } from "../clients/ieeeXplore";
 import { getDbPool, memoryDb, isDbConnected } from "../db/db";
-import { Cluster, SearchResult } from "@ideaforge/shared";
+import { Cluster, SearchResult } from "@buildwise/shared";
 import { randomUUID } from "crypto";
 
 export async function processResearchForIdea(ideaId: string) {

@@ -1,6 +1,6 @@
-# IdeaForge Demo Fixture & Offline Pre-Run Data
+# BuildWise Demo Fixture & Offline Pre-Run Data
 
-This document contains a complete, verified pre-run sample execution fixture for IdeaForge. In case of network instability or missing external API tokens on stage during a live demo, this fixture provides offline fallback data.
+This document contains a complete, verified pre-run sample execution fixture for BuildWise. In case of network instability or missing external API tokens on stage during a live demo, this fixture provides offline fallback data.
 
 ---
 
@@ -105,8 +105,8 @@ This document contains a complete, verified pre-run sample execution fixture for
 {
   "linkId": "e91b29a4-1234-4567-89ab-cdef01234567",
   "planId": "c71a5392-809f-4318-912b",
-  "repoUrl": "https://github.com/ideaforge-org/student-research-c71a5392",
-  "starterPrUrl": "https://github.com/ideaforge-org/student-research-c71a5392/pull/1",
+  "repoUrl": "https://github.com/buildwise-org/student-research-c71a5392",
+  "starterPrUrl": "https://github.com/buildwise-org/student-research-c71a5392/pull/1",
   "issuesCreated": 3,
   "__mocked": true
 }

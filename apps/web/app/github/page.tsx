@@ -4,6 +4,15 @@ import { mockGitHubByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
 import { Github, GitPullRequest, ListChecks, ArrowUpRight, CheckCircle2, Clock, AlertCircle } from "lucide-react";
 
+interface GitHubIssueData {
+  id: string;
+  number: number;
+  title: string;
+  url: string;
+  status: "done" | "in_progress" | "pending" | string;
+  researchComment?: string;
+}
+
 export default function GitHubExecutionPage() {
   const { t } = useLanguage();
   const github = mockGitHubByIdea["idea-food-waste-2026"];
@@ -79,7 +88,7 @@ export default function GitHubExecutionPage() {
         </div>
 
         <div className="space-y-3">
-          {github.issues.map((issue: any) => (
+          {github.issues.map((issue: GitHubIssueData) => (
             <div key={issue.id} className="glass-card p-4 rounded-xl space-y-2">
               <div className="flex items-center justify-between">
                 <a

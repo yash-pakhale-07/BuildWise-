@@ -2,11 +2,12 @@
 
 import { mockClustersByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
+import { SearchResult, Cluster } from "@buildwise/shared";
 import { Network, ExternalLink } from "lucide-react";
 
 export default function ClusteringPage() {
   const { t } = useLanguage();
-  const clusters = mockClustersByIdea["idea-food-waste-2026"] || [];
+  const clusters: Cluster[] = mockClustersByIdea["idea-food-waste-2026"] || [];
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
@@ -26,14 +27,14 @@ export default function ClusteringPage() {
 
       {/* 4 Cluster Board Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {clusters.map((cluster) => {
+        {clusters.map((cluster: Cluster) => {
           const isGapCluster = cluster.type === "gaps";
           const summaryText = isGapCluster ? t("content.foodWasteIdea.gapSummary") : cluster.summary;
           const labelKey = `labels.${cluster.type === "existing_solutions" ? "existingSolutions" : cluster.type === "academic" ? "academicApproaches" : cluster.type === "oss" ? "openSourceImplementations" : "gaps"}`;
           const localizedLabel = t(labelKey);
 
           return (
-            <div key={cluster.id} className="glass-card p-6 rounded-2xl space-y-4 flex flex-col justify-between border-t-4 border-t-secondary">
+            <div key={cluster.id || cluster.type} className="glass-card p-6 rounded-2xl space-y-4 flex flex-col justify-between border-t-4 border-t-secondary">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-secondary px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20">
@@ -55,7 +56,7 @@ export default function ClusteringPage() {
                 </h4>
 
                 <div className="space-y-2">
-                  {cluster.sources?.map((src, sIdx) => (
+                  {cluster.sources?.map((src: SearchResult, sIdx: number) => (
                     <div key={sIdx} className="p-3 rounded-xl bg-bg border border-border text-xs space-y-1 hover:border-accent transition-colors">
                       <div className="flex items-center justify-between gap-2">
                         <a

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { ProjectPlan, MilestoneItem, DatasetItem, RepoItem } from "@ideaforge/shared";
+import { ProjectPlan, MilestoneItem, DatasetItem, RepoItem } from "@buildwise/shared";
 import { Cpu, Github, GitPullRequest, ListChecks, Database, Code2, Sparkles, CheckCircle2, ExternalLink, ArrowUpRight } from "lucide-react";
 
 export default function ProjectPlanPage() {

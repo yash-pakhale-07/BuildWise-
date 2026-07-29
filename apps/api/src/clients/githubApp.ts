@@ -1,4 +1,4 @@
-import { MilestoneItem } from "@ideaforge/shared";
+import { MilestoneItem } from "@buildwise/shared";
 
 export interface GitHubAppClient {
   scaffoldRepo(planId: string, techStack: object): Promise<{ repoUrl: string }>;
