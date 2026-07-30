@@ -1,15 +1,17 @@
 "use client";
 
-import { Home, Search, Network, Radio, Rocket, BookOpen, Github, Bot, LayoutDashboard, Globe, Settings, Sparkles, ChevronDown } from "lucide-react";
+import { Home, Search, Network, Radio, Rocket, BookOpen, Github, Bot, LayoutDashboard, Globe, Settings, Sparkles, ChevronDown, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
 import { CompactLanguageSwitcher } from "../lib/i18n/LanguageSwitcher";
 import { useLanguage } from "../lib/i18n/LanguageProvider";
+import { useAuth } from "../lib/auth/AuthContext";
 
 export function Sidebar() {
   const pathname = usePathname();
   const { t } = useLanguage();
+  const { user, logout } = useAuth();
 
   const groups = [
     {
@@ -96,8 +98,32 @@ export function Sidebar() {
         ))}
       </nav>
 
-      {/* Footer Controls: ThemeToggle & CompactLanguageSwitcher */}
-      <div className="border-t border-border p-3 bg-card space-y-2">
+      {/* Footer Controls */}
+      <div className="border-t border-border p-3 bg-card space-y-3">
+        {user ? (
+          <div className="flex items-center justify-between gap-2 pb-3 border-b border-border/50">
+            <div className="flex items-center gap-2 overflow-hidden">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                <span className="font-bold text-primary text-xs">{user.name.charAt(0).toUpperCase()}</span>
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-xs font-bold text-fg truncate">{user.name}</p>
+                <p className="text-[10px] text-fg-muted truncate">{user.email}</p>
+              </div>
+            </div>
+            <button 
+              onClick={logout} 
+              className="p-1.5 rounded-lg text-fg-muted hover:text-red-500 hover:bg-red-500/10 transition-colors shrink-0"
+              title="Logout"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          <div className="pb-3 border-b border-border/50">
+            <Link href="/login" className="text-xs font-bold text-primary hover:underline">Sign In</Link>
+          </div>
+        )}
         <div className="flex items-center justify-between gap-2">
           <span className="text-[10px] uppercase font-bold text-fg-muted tracking-wider">
             {t("sidebar.language")}
