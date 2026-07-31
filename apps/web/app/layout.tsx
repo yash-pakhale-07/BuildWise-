@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Providers } from "./providers";
 import { Sidebar } from "../components/Sidebar";
+import { RouteGuard } from "../components/RouteGuard";
 
 export const metadata = {
   title: "BuildWise — AI Research & Innovation Platform",
@@ -12,10 +13,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased selection:bg-accent/20 selection:text-fg">
         <Providers>
-          <div className="flex h-screen overflow-hidden bg-bg text-fg">
-            <Sidebar />
-            <main className="flex-1 overflow-y-auto px-8 py-8">{children}</main>
-          </div>
+          <RouteGuard>
+            <div className="flex h-screen overflow-hidden bg-bg text-fg">
+              <Sidebar />
+              <main className="flex-1 overflow-y-auto px-8 py-8">{children}</main>
+            </div>
+          </RouteGuard>
         </Providers>
       </body>
     </html>
