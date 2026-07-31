@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { mockPlansByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
 import { ProjectPlan, TechStackChoice, MilestoneItem, DatasetItem, RepoItem } from "@buildwise/shared";
 import { Rocket, Cpu, ListChecks, Database, Github, Code2, ArrowUpRight, FileText } from "lucide-react";
@@ -11,7 +10,14 @@ import { HackathonReportModal } from "../../components/HackathonReportModal";
 export default function ProjectHubPage() {
   const { t } = useLanguage();
   const [reportModalOpen, setReportModalOpen] = useState(false);
-  const plan: ProjectPlan = mockPlansByIdea["idea-food-waste-2026"];
+  const plan: ProjectPlan = {
+    architecture: {},
+    techStack: [],
+    milestones: [],
+    datasets: [],
+    repos: [],
+    generatedDoc: "",
+  };
 
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
@@ -179,7 +185,7 @@ export default function ProjectHubPage() {
       <HackathonReportModal
         isOpen={reportModalOpen}
         onClose={() => setReportModalOpen(false)}
-        ideaId="idea-food-waste-2026"
+        ideaId=""
       />
     </div>
   );

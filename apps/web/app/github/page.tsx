@@ -1,6 +1,5 @@
 "use client";
 
-import { mockGitHubByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
 import { Github, GitPullRequest, ListChecks, ArrowUpRight, CheckCircle2, Clock, AlertCircle } from "lucide-react";
 
@@ -15,7 +14,7 @@ interface GitHubIssueData {
 
 export default function GitHubExecutionPage() {
   const { t } = useLanguage();
-  const github = mockGitHubByIdea["idea-food-waste-2026"];
+  const github = { repoUrl: "", starterPrUrl: "", issues: [] as GitHubIssueData[] };
 
   const renderIssueBadge = (status: string) => {
     switch (status) {

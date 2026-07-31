@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { ProjectPlan, MilestoneItem, DatasetItem, RepoItem } from "@buildwise/shared";
 import { API_BASE_URL } from "../../../lib/config";
+import { useAuth } from "../../../lib/auth/AuthContext";
 import { Cpu, Github, GitPullRequest, ListChecks, Database, Code2, Sparkles, CheckCircle2, ExternalLink, ArrowUpRight, FileText } from "lucide-react";
 import { HackathonReportModal } from "../../../components/HackathonReportModal";
 
 export default function ProjectPlanPage() {
   const params = useParams();
   const ideaId = params?.id as string;
+  const { token } = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [scaffolding, setScaffolding] = useState(false);
@@ -24,7 +26,7 @@ export default function ProjectPlanPage() {
     async function loadPlan() {
       try {
         setLoading(true);
-        const res = await fetch(`${API_BASE_URL}/api/idea/${ideaId}/plan`, { method: "POST" });
+        const res = await fetch(`${API_BASE_URL}/api/idea/${ideaId}/plan`, { method: "POST", headers: { Authorization: `Bearer ${token}` } });
         if (!res.ok) throw new Error("Failed to generate project plan");
         const data = await res.json();
         setPlan(data);
@@ -36,13 +38,13 @@ export default function ProjectPlanPage() {
     }
 
     loadPlan();
-  }, [ideaId]);
+  }, [ideaId, token]);
 
   const handleScaffoldRepo = async () => {
     if (!plan?.id) return;
     try {
       setScaffolding(true);
-      const res = await fetch(`${API_BASE_URL}/api/plan/${plan.id}/github-scaffold`, { method: "POST" });
+      const res = await fetch(`${API_BASE_URL}/api/plan/${plan.id}/github-scaffold`, { method: "POST", headers: { Authorization: `Bearer ${token}` } });
       if (!res.ok) throw new Error("Failed to scaffold GitHub repository");
       const data = await res.json();
       setScaffoldResult(data);

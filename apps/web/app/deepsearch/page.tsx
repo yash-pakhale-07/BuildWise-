@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { mockClustersByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
 import { SearchResult, Cluster } from "@buildwise/shared";
 import { Search, ExternalLink, Filter } from "lucide-react";
 
 export default function DeepSearchPage() {
   const { t } = useLanguage();
-  const [query, setQuery] = useState("College Hostel Food Waste AI");
+  const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
-  const clusters: Cluster[] = mockClustersByIdea["idea-food-waste-2026"] || [];
+  const clusters: Cluster[] = [];
   const allSources: SearchResult[] = clusters.flatMap((c: Cluster) => c.sources || []);
 
   const filteredSources: SearchResult[] = allSources.filter((src: SearchResult) => {
@@ -88,6 +87,7 @@ export default function DeepSearchPage() {
 
       {/* Search Results List */}
       <div className="space-y-3">
+        {filteredSources.length === 0 && <p className="text-sm text-fg-muted">No research sources yet. Open a research workspace for one of your ideas to get started.</p>}
         {filteredSources.map((src: SearchResult, idx: number) => (
           <div key={idx} className="glass-card p-5 rounded-xl space-y-2 border-l-4 border-l-accent hover:border-accent transition-colors">
             <div className="flex items-start justify-between gap-3">
