@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { mockPlansByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
 import { ProjectPlan, TechStackChoice, MilestoneItem, DatasetItem, RepoItem } from "@buildwise/shared";
-import { Rocket, Cpu, ListChecks, Database, Github, Code2, ArrowUpRight } from "lucide-react";
+import { Rocket, Cpu, ListChecks, Database, Github, Code2, ArrowUpRight, FileText } from "lucide-react";
 import Link from "next/link";
+import { HackathonReportModal } from "../../components/HackathonReportModal";
 
 export default function ProjectHubPage() {
   const { t } = useLanguage();
+  const [reportModalOpen, setReportModalOpen] = useState(false);
   const plan: ProjectPlan = mockPlansByIdea["idea-food-waste-2026"];
 
   return (
@@ -27,13 +30,23 @@ export default function ProjectHubPage() {
           </p>
         </div>
 
-        <Link
-          href="/github"
-          className="px-5 py-2.5 rounded-xl font-semibold text-xs text-white bg-primary hover:bg-primary/90 flex items-center gap-2 self-start md:self-auto shadow-sm"
-        >
-          <Github className="w-4 h-4" />
-          <span>{t("buttons.scaffoldRepo")}</span>
-        </Link>
+        <div className="flex flex-wrap items-center gap-3 self-start md:self-auto">
+          <button
+            onClick={() => setReportModalOpen(true)}
+            className="glow-button px-5 py-2.5 rounded-xl font-semibold text-xs text-white flex items-center gap-2 shadow-md hover:brightness-110 transition-all"
+          >
+            <FileText className="w-4 h-4 text-accent" />
+            <span>{t("buttons.generateHackathonReport")}</span>
+          </button>
+
+          <Link
+            href="/github"
+            className="px-5 py-2.5 rounded-xl font-semibold text-xs text-fg bg-bg border border-border hover:bg-card flex items-center gap-2 shadow-sm"
+          >
+            <Github className="w-4 h-4 text-fg-muted" />
+            <span>{t("buttons.scaffoldRepo")}</span>
+          </Link>
+        </div>
       </div>
 
       {/* Architecture Visualizer Box Diagram */}
@@ -161,6 +174,13 @@ export default function ProjectHubPage() {
           </div>
         </div>
       </div>
+
+      {/* Hackathon Report Preview Modal */}
+      <HackathonReportModal
+        isOpen={reportModalOpen}
+        onClose={() => setReportModalOpen(false)}
+        ideaId="idea-food-waste-2026"
+      />
     </div>
   );
 }
