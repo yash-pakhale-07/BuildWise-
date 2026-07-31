@@ -130,3 +130,116 @@ export interface AgentInteraction {
   direction: "inbound" | "outbound";
   createdAt?: string;
 }
+
+export interface HackathonReportReference {
+  title: string;
+  authors?: string[];
+  year?: number;
+  source: string;
+  summary: string;
+  url: string;
+}
+
+export interface HackathonReport {
+  id: string;
+  planId?: string;
+  ideaId?: string;
+  title: string;
+  domain: string;
+  teamName?: string;
+  generatedDate: string;
+  coverPage: {
+    title: string;
+    domain: string;
+    teamName: string;
+    date: string;
+    branding: string;
+  };
+  executiveSummary: {
+    overview: string;
+    problem: string;
+    solution: string;
+    expectedOutcome: string;
+    text: string;
+  };
+  problemStatement: {
+    existingProblem: string;
+    whoIsAffected: string;
+    currentChallenges: string;
+    whyItMatters: string;
+    text: string;
+  };
+  proposedSolution: {
+    overview: string;
+    keyFeatures: string[];
+    innovation: string;
+    uniqueValueProposition: string;
+    competitiveAdvantage: string;
+    text: string;
+  };
+  technicalApproach: {
+    architectureOverview: string;
+    frontend: string;
+    backend: string;
+    database: string;
+    apis: string[];
+    aiModels: string[];
+    deployment: string;
+    security: string;
+    developmentWorkflow: string;
+    diagramNodes: { id: string; label: string; type: string }[];
+  };
+  feasibilityAndViability: {
+    technicalFeasibility: string;
+    operationalFeasibility: string;
+    scalability: string;
+    costEffectiveness: string;
+    sustainability: string;
+    risksAndMitigation: string;
+  };
+  impactAndBenefits: {
+    targetUsers: string;
+    businessImpact: string;
+    socialImpact: string;
+    productivityImprovements: string;
+    timeSavings: string;
+    futureAdoption: string;
+  };
+  researchAndReferences: {
+    findings: string;
+    existingSolutions: string;
+    identifiedGap: string;
+    howProjectAddressesGap: string;
+    references: HackathonReportReference[];
+  };
+  futureScope: {
+    futureImprovements: string;
+    aiEnhancements: string;
+    mobileApplication: string;
+    cloudDeployment: string;
+    commercialization: string;
+    scalability: string;
+  };
+  conclusion: {
+    summary: string;
+    problem: string;
+    solution: string;
+    innovation: string;
+    expectedImpact: string;
+    longTermVision: string;
+  };
+  projectSnapshot: {
+    readiness: string;
+    techStackSummary: string;
+    estimatedTimeline: string;
+    researchSourcesCount: number;
+    innovationLevel: string;
+    scalabilityRating: string;
+    feasibilityRating: string;
+    aiModelsUsed: string[];
+    apisUsed: string[];
+  };
+  createdAt?: string;
+  __mocked?: boolean;
+}
+
