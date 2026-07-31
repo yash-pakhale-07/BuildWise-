@@ -1,6 +1,5 @@
 "use client";
 
-import { mockClustersByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
 import { Cluster, SearchResult } from "@buildwise/shared";
 import { BookOpen, ExternalLink, ArrowRight } from "lucide-react";
@@ -8,7 +7,7 @@ import Link from "next/link";
 
 export default function ResearchWorkspaceAggregatorPage() {
   const { t } = useLanguage();
-  const clusters: Cluster[] = mockClustersByIdea["idea-food-waste-2026"] || [];
+  const clusters: Cluster[] = [];
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
@@ -38,9 +37,9 @@ export default function ResearchWorkspaceAggregatorPage() {
 
       {/* Aggregated Cluster Summaries */}
       <div className="space-y-4">
+        {clusters.length === 0 && <p className="text-sm text-fg-muted">No research workspace data yet. Create an idea and run research to get started.</p>}
         {clusters.map((c: Cluster) => {
-          const isGap = c.type === "gaps";
-          const summaryText = isGap ? t("content.foodWasteIdea.gapSummary") : c.summary;
+          const summaryText = c.summary;
           const labelKey = `labels.${c.type === "existing_solutions" ? "existingSolutions" : c.type === "academic" ? "academicApproaches" : c.type === "oss" ? "openSourceImplementations" : "gaps"}`;
           const localizedLabel = t(labelKey);
 

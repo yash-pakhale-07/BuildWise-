@@ -3,24 +3,21 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { API_BASE_URL, USE_MOCKS } from "../lib/config";
-import { defaultIdea } from "../lib/mocks";
 import { useLanguage } from "../lib/i18n/LanguageProvider";
+import { useAuth } from "../lib/auth/AuthContext";
 import { Sparkles, Lightbulb, ArrowRight, ShieldCheck, Zap, BookOpen, Layers } from "lucide-react";
 
 export default function OverviewPage() {
   const router = useRouter();
   const { t } = useLanguage();
+  const { token } = useAuth();
 
   const foodWasteTitle = t("content.foodWasteIdea.title");
   const foodWasteFeasibility = t("content.foodWasteIdea.feasibility");
 
-  const [ideaText, setIdeaText] = useState(foodWasteTitle);
+  const [ideaText, setIdeaText] = useState("");
   const [loading, setLoading] = useState(false);
-  const [validationResult, setValidationResult] = useState<any>({
-    ...defaultIdea,
-    rawText: foodWasteTitle,
-    feasibilityNotes: foodWasteFeasibility,
-  });
+  const [validationResult, setValidationResult] = useState<any>(null);
 
   const handleValidate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +28,6 @@ export default function OverviewPage() {
     if (USE_MOCKS) {
       setTimeout(() => {
         setValidationResult({
-          ...defaultIdea,
           rawText: ideaText,
           feasibilityNotes: foodWasteFeasibility,
         });
@@ -41,7 +37,7 @@ export default function OverviewPage() {
       try {
         const res = await fetch(`${API_BASE_URL}/api/idea`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
           body: JSON.stringify({ text: ideaText }),
         });
         const data = await res.json();

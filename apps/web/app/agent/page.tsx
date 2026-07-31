@@ -1,6 +1,5 @@
 "use client";
 
-import { mockAgentActivity } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
 import { AgentInteraction } from "@buildwise/shared";
 import { Bot, Send, User } from "lucide-react";
@@ -8,7 +7,7 @@ import { useState } from "react";
 
 export default function AgentTranscriptPage() {
   const { t } = useLanguage();
-  const [messages, setMessages] = useState<AgentInteraction[]>(mockAgentActivity);
+  const [messages, setMessages] = useState<AgentInteraction[]>([]);
   const [inputText, setInputText] = useState("");
 
   const handleSendMessage = (e: React.FormEvent) => {

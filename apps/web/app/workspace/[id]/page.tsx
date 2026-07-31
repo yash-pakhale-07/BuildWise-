@@ -5,11 +5,13 @@ import { useParams, useRouter } from "next/navigation";
 import { Cluster, SearchResult } from "@buildwise/shared";
 import { BookOpen, Github, Globe, Sparkles, ArrowRight, Layers, ExternalLink, UserCheck, AlertTriangle } from "lucide-react";
 import { API_BASE_URL } from "../../../lib/config";
+import { useAuth } from "../../../lib/auth/AuthContext";
 
 export default function WorkspacePage() {
   const params = useParams();
   const router = useRouter();
   const ideaId = params?.id as string;
+  const { token } = useAuth();
 
   const [loading, setLoading] = useState(true);
   const [clusters, setClusters] = useState<Cluster[]>([]);
@@ -22,9 +24,11 @@ export default function WorkspacePage() {
       try {
         setLoading(true);
         // Trigger background research job
-        await fetch(`${API_BASE_URL}/api/idea/${ideaId}/research`, { method: "POST" });
+        const headers = { Authorization: `Bearer ${token}` };
+        const researchResponse = await fetch(`${API_BASE_URL}/api/idea/${ideaId}/research`, { method: "POST", headers });
+        if (!researchResponse.ok) throw new Error("Failed to start research");
         // Fetch current status and clusters
-        const res = await fetch(`${API_BASE_URL}/api/idea/${ideaId}/research/status`);
+        const res = await fetch(`${API_BASE_URL}/api/idea/${ideaId}/research/status`, { headers });
         if (!res.ok) throw new Error("Failed to fetch research status");
         const data = await res.json();
         setClusters(data.clusters || []);
@@ -36,7 +40,7 @@ export default function WorkspacePage() {
     }
 
     loadResearch();
-  }, [ideaId]);
+  }, [ideaId, token]);
 
   const handleGeneratePlan = async () => {
     router.push(`/plan/${ideaId}`);

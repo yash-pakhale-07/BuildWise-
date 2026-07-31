@@ -1,13 +1,12 @@
 "use client";
 
-import { mockClustersByIdea } from "../../lib/mocks";
 import { useLanguage } from "../../lib/i18n/LanguageProvider";
 import { SearchResult, Cluster } from "@buildwise/shared";
 import { Network, ExternalLink } from "lucide-react";
 
 export default function ClusteringPage() {
   const { t } = useLanguage();
-  const clusters: Cluster[] = mockClustersByIdea["idea-food-waste-2026"] || [];
+  const clusters: Cluster[] = [];
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto">
@@ -27,9 +26,9 @@ export default function ClusteringPage() {
 
       {/* 4 Cluster Board Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {clusters.length === 0 && <p className="text-sm text-fg-muted">No research clusters yet. Run research for one of your ideas to get started.</p>}
         {clusters.map((cluster: Cluster) => {
-          const isGapCluster = cluster.type === "gaps";
-          const summaryText = isGapCluster ? t("content.foodWasteIdea.gapSummary") : cluster.summary;
+          const summaryText = cluster.summary;
           const labelKey = `labels.${cluster.type === "existing_solutions" ? "existingSolutions" : cluster.type === "academic" ? "academicApproaches" : cluster.type === "oss" ? "openSourceImplementations" : "gaps"}`;
           const localizedLabel = t(labelKey);
 
