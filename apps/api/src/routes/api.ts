@@ -3,6 +3,7 @@ import { z } from "zod";
 import { validateIdea } from "../agents/validation";
 import { processResearchForIdea, getResearchStatus } from "../agents/research";
 import { generatePlanForIdea } from "../agents/planGeneration";
+import { generateHackathonReportForIdea, regenerateReportSection } from "../agents/reportGeneration";
 import { scaffoldGitHubRepo } from "../agents/githubAppScaffolder";
 import { handleTelegramWebhook } from "../agents/telegramAgent";
 import { getDbPool, memoryDb, isDbConnected } from "../db/db";
@@ -59,7 +60,36 @@ export async function apiRoutes(fastify: FastifyInstance) {
     }
   });
 
-  // 5. POST /api/plan/:id/github-scaffold -> GitHub App Agent
+  // 5. POST /api/idea/:id/report -> Hackathon Report Generator
+  fastify.post("/api/idea/:id/report", async (request, reply) => {
+    try {
+      const paramsSchema = z.object({ id: z.string() });
+      const { id } = paramsSchema.parse(request.params);
+      const report = await generateHackathonReportForIdea(id);
+      return reply.send(report);
+    } catch (err: any) {
+      return reply.status(400).send({ error: err.message || "Failed to generate hackathon report" });
+    }
+  });
+
+  // 6. POST /api/idea/:id/report/regenerate-section -> Regenerate Single Section
+  fastify.post("/api/idea/:id/report/regenerate-section", async (request, reply) => {
+    try {
+      const paramsSchema = z.object({ id: z.string() });
+      const bodySchema = z.object({
+        sectionKey: z.string(),
+        currentData: z.any().optional(),
+      });
+      const { id } = paramsSchema.parse(request.params);
+      const { sectionKey, currentData } = bodySchema.parse(request.body);
+      const updatedSection = await regenerateReportSection(id, sectionKey, currentData);
+      return reply.send({ sectionKey, data: updatedSection });
+    } catch (err: any) {
+      return reply.status(400).send({ error: err.message || "Failed to regenerate report section" });
+    }
+  });
+
+  // 7. POST /api/plan/:id/github-scaffold -> GitHub App Agent
   fastify.post("/api/plan/:id/github-scaffold", async (request, reply) => {
     try {
       const paramsSchema = z.object({ id: z.string() });

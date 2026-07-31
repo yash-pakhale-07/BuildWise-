@@ -5,6 +5,8 @@ import { useParams } from "next/navigation";
 import { ProjectPlan, MilestoneItem, DatasetItem, RepoItem } from "@buildwise/shared";
 import { Cpu, Github, GitPullRequest, ListChecks, Database, Code2, Sparkles, CheckCircle2, ExternalLink, ArrowUpRight } from "lucide-react";
 import { API_BASE_URL } from "../../../lib/config";
+import { Cpu, Github, GitPullRequest, ListChecks, Database, Code2, Sparkles, CheckCircle2, ExternalLink, ArrowUpRight, FileText } from "lucide-react";
+import { HackathonReportModal } from "../../../components/HackathonReportModal";
 
 export default function ProjectPlanPage() {
   const params = useParams();
@@ -15,6 +17,7 @@ export default function ProjectPlanPage() {
   const [plan, setPlan] = useState<ProjectPlan | null>(null);
   const [scaffoldResult, setScaffoldResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [reportModalOpen, setReportModalOpen] = useState(false);
 
   useEffect(() => {
     if (!ideaId) return;
@@ -68,23 +71,34 @@ export default function ProjectPlanPage() {
           </p>
         </div>
 
-        <button
-          onClick={handleScaffoldRepo}
-          disabled={scaffolding || loading || !plan}
-          className="glow-button px-6 py-3 rounded-xl font-semibold text-sm text-white flex items-center gap-2 self-start md:self-auto disabled:opacity-50"
-        >
-          {scaffolding ? (
-            <>
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              <span>Scaffolding Repo & PR...</span>
-            </>
-          ) : (
-            <>
-              <Github className="w-4 h-4" />
-              <span>Scaffold Repo on GitHub</span>
-            </>
-          )}
-        </button>
+        <div className="flex flex-wrap items-center gap-3 self-start md:self-auto">
+          <button
+            onClick={() => setReportModalOpen(true)}
+            disabled={loading || !plan}
+            className="glow-button px-6 py-3 rounded-xl font-semibold text-sm text-white flex items-center gap-2 disabled:opacity-50 shadow-lg hover:brightness-110 transition-all"
+          >
+            <FileText className="w-4 h-4 text-accent" />
+            <span>Generate Hackathon Report</span>
+          </button>
+
+          <button
+            onClick={handleScaffoldRepo}
+            disabled={scaffolding || loading || !plan}
+            className="px-5 py-3 rounded-xl font-semibold text-sm text-white bg-surface border border-border hover:bg-card flex items-center gap-2 disabled:opacity-50 transition-all"
+          >
+            {scaffolding ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span>Scaffolding Repo & PR...</span>
+              </>
+            ) : (
+              <>
+                <Github className="w-4 h-4 text-slate-300" />
+                <span>Scaffold Repo on GitHub</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {loading && (
@@ -276,6 +290,13 @@ export default function ProjectPlanPage() {
           </div>
         </div>
       )}
+
+      {/* Hackathon Report Preview Modal */}
+      <HackathonReportModal
+        isOpen={reportModalOpen}
+        onClose={() => setReportModalOpen(false)}
+        ideaId={ideaId}
+      />
     </div>
   );
 }

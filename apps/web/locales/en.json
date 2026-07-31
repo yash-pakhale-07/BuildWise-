@@ -34,6 +34,7 @@
     "newIdea": "New Research Idea",
     "viewPlan": "Project Hub",
     "scaffoldRepo": "Scaffold Repo on GitHub",
+    "generateHackathonReport": "Generate Hackathon Report",
     "openProjectHub": "Open Project Hub"
   },
   "labels": {
