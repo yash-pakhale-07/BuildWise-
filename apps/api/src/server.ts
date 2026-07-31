@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { initDb } from "./db/db";
 import { apiRoutes } from "./routes/api";
 import { authRoutes } from "./routes/auth";
-
+import { ideasRoutes } from "./routes/ideas";
 
 dotenv.config();
 
@@ -19,8 +19,28 @@ async function startServer() {
   });
 
   await initDb();
+
+  const { isDbConnected, getDbPool } = require("./db/db");
+  if (isDbConnected()) {
+    console.log("Database mode: PostgreSQL");
+    const pool = getDbPool();
+    if (pool) {
+      try {
+        const dbRes = await pool.query("SELECT current_database();");
+        const countRes = await pool.query("SELECT COUNT(*) FROM users;");
+        console.log(`Database connected: ${dbRes.rows[0].current_database}`);
+        console.log(`Users in database: ${countRes.rows[0].count}`);
+      } catch (e) {
+        // ignore
+      }
+    }
+  } else {
+    console.log("Database mode: In-memory fallback");
+  }
+
   await server.register(apiRoutes);
   await server.register(authRoutes);
+  await server.register(ideasRoutes);
 
   const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
   
