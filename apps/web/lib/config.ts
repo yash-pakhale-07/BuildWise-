@@ -1,4 +1,4 @@
-// Config flag for frontend-first execution mode
-export const USE_MOCKS = true;
+// Enable frontend mock data only when explicitly requested.
+export const USE_MOCKS = process.env.NEXT_PUBLIC_USE_MOCKS === "true";
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";

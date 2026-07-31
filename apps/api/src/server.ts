@@ -1,7 +1,7 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import dotenv from "dotenv";
-import { initDb } from "./db/db";
+import { getDbPool, initDb, isDbConnected } from "./db/db";
 import { apiRoutes } from "./routes/api";
 import { authRoutes } from "./routes/auth";
 import { ideasRoutes } from "./routes/ideas";
@@ -20,7 +20,6 @@ async function startServer() {
 
   await initDb();
 
-  const { isDbConnected, getDbPool } = require("./db/db");
   if (isDbConnected()) {
     console.log("Database mode: PostgreSQL");
     const pool = getDbPool();

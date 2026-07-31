@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { USE_MOCKS } from "../lib/config";
+import { API_BASE_URL, USE_MOCKS } from "../lib/config";
 import { defaultIdea } from "../lib/mocks";
 import { useLanguage } from "../lib/i18n/LanguageProvider";
 import { Sparkles, Lightbulb, ArrowRight, ShieldCheck, Zap, BookOpen, Layers } from "lucide-react";
@@ -39,7 +39,7 @@ export default function OverviewPage() {
       }, 500);
     } else {
       try {
-        const res = await fetch("http://localhost:4000/api/idea", {
+        const res = await fetch(`${API_BASE_URL}/api/idea`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ text: ideaText }),
