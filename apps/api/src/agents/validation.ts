@@ -10,9 +10,12 @@ export async function validateIdea(rawText: string, userId?: string) {
   const searchResults = await insightsClient.deepSearch(rawText, ["web", "ieee_xplore"]);
 
   const noveltyScore = signal.noveltyScore;
+  if (!Number.isInteger(noveltyScore) || noveltyScore < 0 || noveltyScore > 100) {
+    throw new Error("AI validation returned an invalid novelty score");
+  }
   const feasibilityNotes = signal.notes + ` Identified ${searchResults.length} related academic & web reference benchmarks.`;
   const ideaId = randomUUID();
-  const status = "validating";
+  const status = "validated";
 
   // 2. Persist to DB or Memory Fallback
   const pool = getDbPool();
@@ -32,6 +35,19 @@ export async function validateIdea(rawText: string, userId?: string) {
   }
 
   return {
+    idea: {
+      id: ideaId,
+      rawText,
+      noveltyScore,
+      feasibilityNotes,
+      status,
+    },
+    validation: {
+      noveltyScore,
+      demandScore: signal.demandScore,
+      notes: signal.notes,
+    },
+    // Retained for existing clients while they migrate to the canonical nested shape.
     ideaId,
     noveltyScore,
     feasibilityNotes,

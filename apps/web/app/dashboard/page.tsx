@@ -74,7 +74,7 @@ export default function DashboardPage() {
           {!error && ideas.length === 0 && <p className="text-sm text-fg-muted">No research ideas yet. Create your first research idea to get started.</p>}
           {ideas.map((idea) => (
             <div key={idea.id} className="glass-card p-4 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="space-y-1 max-w-xl"><div className="flex items-center gap-3">{getStatusBadge(idea.status)}<span className="text-xs text-fg-muted">{t("labels.noveltyScore")}: <strong className="text-fg">{idea.noveltyScore ?? 0}%</strong></span></div><p className="text-xs font-bold text-fg line-clamp-2">{idea.raw_text || idea.rawText}</p></div>
+              <div className="space-y-1 max-w-xl"><div className="flex items-center gap-3">{getStatusBadge(idea.status)}<span className="text-xs text-fg-muted">{t("labels.noveltyScore")}: <strong className="text-fg">{Number.isInteger(idea.noveltyScore) ? `${idea.noveltyScore}%` : "Pending"}</strong></span></div><p className="text-xs font-bold text-fg line-clamp-2">{idea.raw_text || idea.rawText}</p></div>
               <div className="flex items-center gap-2.5 self-end md:self-auto"><Link href={`/workspace/${idea.id}`} className="px-3.5 py-1.5 rounded-lg bg-bg border border-border text-xs font-semibold text-fg-muted hover:text-fg transition-colors">{t("sidebar.deepsearch")}</Link><Link href={`/plan/${idea.id}`} className="px-3.5 py-1.5 rounded-lg bg-primary/10 border border-primary/30 text-xs font-semibold text-primary hover:bg-primary/20 transition-colors flex items-center gap-1"><span>{t("buttons.viewPlan")}</span><ArrowRight className="w-3.5 h-3.5" /></Link></div>
             </div>
           ))}

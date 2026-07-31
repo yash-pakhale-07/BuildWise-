@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS ideas (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
+CREATE INDEX IF NOT EXISTS ideas_user_id_created_at_idx ON ideas (user_id, created_at DESC);
+
 CREATE TABLE IF NOT EXISTS research_clusters (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   idea_id UUID REFERENCES ideas(id),
@@ -28,6 +30,8 @@ CREATE TABLE IF NOT EXISTS research_clusters (
   sources JSONB,
   created_at TIMESTAMPTZ DEFAULT now()
 );
+
+CREATE INDEX IF NOT EXISTS research_clusters_idea_id_idx ON research_clusters (idea_id);
 
 CREATE TABLE IF NOT EXISTS project_plans (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -40,6 +44,8 @@ CREATE TABLE IF NOT EXISTS project_plans (
   generated_doc TEXT,
   created_at TIMESTAMPTZ DEFAULT now()
 );
+
+CREATE INDEX IF NOT EXISTS project_plans_idea_id_idx ON project_plans (idea_id);
 
 CREATE TABLE IF NOT EXISTS milestones (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -59,6 +65,8 @@ CREATE TABLE IF NOT EXISTS github_links (
   installed_at TIMESTAMPTZ DEFAULT now(),
   last_synced_at TIMESTAMPTZ
 );
+
+CREATE INDEX IF NOT EXISTS github_links_plan_id_idx ON github_links (plan_id);
 
 CREATE TABLE IF NOT EXISTS agent_interactions (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

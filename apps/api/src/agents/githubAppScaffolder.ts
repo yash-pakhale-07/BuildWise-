@@ -2,28 +2,31 @@ import { getGitHubAppClient } from "../clients/githubApp";
 import { getDbPool, memoryDb, isDbConnected } from "../db/db";
 import { randomUUID } from "crypto";
 
-export async function scaffoldGitHubRepo(planId: string) {
+export async function scaffoldGitHubRepo(planId: string, userId: string) {
   const pool = getDbPool();
   let planObj: any = null;
 
   if (isDbConnected() && pool) {
-    const res = await pool.query("SELECT * FROM project_plans WHERE id = $1", [planId]);
+    const res = await pool.query(
+      `SELECT p.* FROM project_plans p
+       JOIN ideas i ON i.id = p.idea_id
+       WHERE p.id = $1 AND i.user_id = $2`,
+      [planId, userId]
+    );
     if (res.rows.length > 0) {
       planObj = res.rows[0];
       planObj.techStack = typeof planObj.tech_stack === "string" ? JSON.parse(planObj.tech_stack) : planObj.tech_stack;
       planObj.milestones = typeof planObj.milestones === "string" ? JSON.parse(planObj.milestones) : planObj.milestones;
     }
   } else {
-    planObj = memoryDb.project_plans.find((p) => p.id === planId);
+    planObj = memoryDb.project_plans.find((p) => {
+      const idea = memoryDb.ideas.find((i) => i.id === p.ideaId);
+      return p.id === planId && idea && (idea.userId || idea.user_id) === userId;
+    });
   }
 
   if (!planObj) {
-    planObj = {
-      id: planId,
-      ideaId: "mock-idea",
-      techStack: [{ layer: "Frontend", choice: "Next.js" }],
-      milestones: [{ title: "Initial Setup", dueInDays: 3 }],
-    };
+    throw new Error("Project plan not found");
   }
 
   const githubClient = getGitHubAppClient();

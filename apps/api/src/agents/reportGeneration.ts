@@ -3,17 +3,19 @@ import { getDbPool, memoryDb, isDbConnected } from "../db/db";
 import { mockApiHackathonReports } from "../mocks/report.mock";
 import { getResearchStatus } from "./research";
 
-export async function generateHackathonReportForIdea(ideaId: string): Promise<HackathonReport> {
+export async function generateHackathonReportForIdea(ideaId: string, userId: string): Promise<HackathonReport> {
   const pool = getDbPool();
   let rawText = "Hostel Food Waste Minimization";
 
   if (isDbConnected() && pool) {
-    const res = await pool.query("SELECT raw_text FROM ideas WHERE id = $1", [ideaId]);
+    const res = await pool.query("SELECT raw_text FROM ideas WHERE id = $1 AND user_id = $2", [ideaId, userId]);
     if (res.rows.length > 0) rawText = res.rows[0].raw_text;
   } else {
-    const found = memoryDb.ideas.find((i) => i.id === ideaId);
+    const found = memoryDb.ideas.find((i) => i.id === ideaId && (i.userId || i.user_id) === userId);
     if (found) rawText = found.rawText;
   }
+
+  if (!rawText) throw new Error("Idea not found");
 
   // Check if mock report exists for pre-configured ideas
   if (mockApiHackathonReports[ideaId]) {
@@ -21,7 +23,7 @@ export async function generateHackathonReportForIdea(ideaId: string): Promise<Ha
   }
 
   // Build dynamic report using research & plan data
-  const { clusters } = await getResearchStatus(ideaId);
+  const { clusters } = await getResearchStatus(ideaId, userId);
   const dateStr = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 
   const references = clusters.flatMap((c) =>
@@ -167,8 +169,8 @@ export async function generateHackathonReportForIdea(ideaId: string): Promise<Ha
   };
 }
 
-export async function regenerateReportSection(ideaId: string, sectionKey: string, currentData: any): Promise<any> {
-  const fullReport = await generateHackathonReportForIdea(ideaId);
+export async function regenerateReportSection(ideaId: string, userId: string, sectionKey: string, currentData: any): Promise<any> {
+  const fullReport = await generateHackathonReportForIdea(ideaId, userId);
 
   // Return regenerated section content with enhanced AI synthesis timestamp note
   const sectionContent = (fullReport as any)[sectionKey] || currentData;

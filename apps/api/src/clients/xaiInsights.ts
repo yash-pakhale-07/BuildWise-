@@ -74,8 +74,12 @@ async function generateJson<T>(prompt: string, schema: z.ZodType<T>, useWebSearc
 export class XAIInsightsClient implements InsightsLayer2Client {
   async getRealTimeSignal(topic: string): Promise<TrendSignal> {
     return generateJson(
-      `Assess the research potential of this BuildWise idea: ${JSON.stringify(topic)}. Return only JSON with demandScore and noveltyScore as integers from 0 to 100, plus a concise notes string. Do not invent citations.`,
-      z.object({ demandScore: z.number().int().min(0).max(100), noveltyScore: z.number().int().min(0).max(100), notes: z.string().min(1) })
+      `Assess the research potential of this BuildWise idea: ${JSON.stringify(topic)}. Return only JSON with numeric demandScore and numeric noveltyScore as integers from 0 to 100, plus a concise notes string. Do not use alternate score field names or percentage symbols. Do not invent citations.`,
+      z.object({
+        demandScore: z.preprocess((value) => typeof value === "string" ? Number(value.replace(/%/g, "").trim()) : value, z.number().int().finite().min(0).max(100)),
+        noveltyScore: z.preprocess((value) => typeof value === "string" ? Number(value.replace(/%/g, "").trim()) : value, z.number().int().finite().min(0).max(100)),
+        notes: z.string().min(1),
+      }) as z.ZodType<TrendSignal>
     );
   }
 
