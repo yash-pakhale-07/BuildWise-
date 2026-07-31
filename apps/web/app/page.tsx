@@ -18,17 +18,20 @@ export default function OverviewPage() {
   const [ideaText, setIdeaText] = useState("");
   const [loading, setLoading] = useState(false);
   const [validationResult, setValidationResult] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleValidate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!ideaText.trim()) return;
 
     setLoading(true);
+    setError(null);
 
     if (USE_MOCKS) {
       setTimeout(() => {
         setValidationResult({
           rawText: ideaText,
+          noveltyScore: 50,
           feasibilityNotes: foodWasteFeasibility,
         });
         setLoading(false);
@@ -41,9 +44,14 @@ export default function OverviewPage() {
           body: JSON.stringify({ text: ideaText }),
         });
         const data = await res.json();
-        setValidationResult(data);
+        if (!res.ok) throw new Error(data.error || "Novelty validation failed");
+        const result = data.idea ?? data;
+        if (!Number.isInteger(result.noveltyScore) || result.noveltyScore < 0 || result.noveltyScore > 100) {
+          throw new Error("Novelty validation returned an invalid score");
+        }
+        setValidationResult(result);
       } catch (err) {
-        console.error(err);
+        setError(err instanceof Error ? err.message : "Novelty validation failed");
       } finally {
         setLoading(false);
       }
@@ -110,6 +118,8 @@ export default function OverviewPage() {
           </button>
         </div>
       </form>
+
+      {error && <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm">{error}</div>}
 
       {/* Validation Result Preview */}
       {validationResult && (

@@ -4,20 +4,20 @@ import { getDbPool, memoryDb, isDbConnected } from "../db/db";
 import { Cluster, SearchResult } from "@buildwise/shared";
 import { randomUUID } from "crypto";
 
-export async function processResearchForIdea(ideaId: string) {
+export async function processResearchForIdea(ideaId: string, userId: string) {
   const pool = getDbPool();
   let rawText = "";
 
   // Fetch idea text
   if (isDbConnected() && pool) {
-    const res = await pool.query("SELECT raw_text FROM ideas WHERE id = $1", [ideaId]);
+    const res = await pool.query("SELECT raw_text FROM ideas WHERE id = $1 AND user_id = $2", [ideaId, userId]);
     if (res.rows.length > 0) rawText = res.rows[0].raw_text;
   } else {
-    const found = memoryDb.ideas.find((i) => i.id === ideaId);
+    const found = memoryDb.ideas.find((i) => i.id === ideaId && (i.userId || i.user_id) === userId);
     if (found) rawText = found.rawText;
   }
 
-  if (!rawText) rawText = "Satellite AI Compression Payload";
+  if (!rawText) throw new Error("Idea not found");
 
   const insightsClient = getInsightsLayer2Client();
   const ieeeClient = getIEEEXploreClient();
@@ -79,12 +79,17 @@ export async function processResearchForIdea(ideaId: string) {
   };
 }
 
-export async function getResearchStatus(ideaId: string) {
+export async function getResearchStatus(ideaId: string, userId: string) {
   const pool = getDbPool();
   let clusters: Cluster[] = [];
 
   if (isDbConnected() && pool) {
-    const res = await pool.query("SELECT * FROM research_clusters WHERE idea_id = $1", [ideaId]);
+    const res = await pool.query(
+      `SELECT rc.* FROM research_clusters rc
+       JOIN ideas i ON i.id = rc.idea_id
+       WHERE rc.idea_id = $1 AND i.user_id = $2`,
+      [ideaId, userId]
+    );
     clusters = res.rows.map((row: Record<string, any>) => ({
       id: row.id,
       ideaId: row.idea_id,
@@ -94,7 +99,7 @@ export async function getResearchStatus(ideaId: string) {
     }));
   } else {
     clusters = memoryDb.research_clusters
-      .filter((c) => c.ideaId === ideaId)
+      .filter((c) => c.ideaId === ideaId && (memoryDb.ideas.find((i) => i.id === ideaId)?.userId || memoryDb.ideas.find((i) => i.id === ideaId)?.user_id) === userId)
       .map((c) => ({
         id: c.id,
         ideaId: c.ideaId,

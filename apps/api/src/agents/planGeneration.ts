@@ -4,19 +4,21 @@ import { getDbPool, memoryDb, isDbConnected } from "../db/db";
 import { ProjectPlan } from "@buildwise/shared";
 import { randomUUID } from "crypto";
 
-export async function generatePlanForIdea(ideaId: string): Promise<ProjectPlan> {
+export async function generatePlanForIdea(ideaId: string, userId: string): Promise<ProjectPlan> {
   const pool = getDbPool();
   let rawText = "Satellite AI Data Compression";
 
   if (isDbConnected() && pool) {
-    const res = await pool.query("SELECT raw_text FROM ideas WHERE id = $1", [ideaId]);
+    const res = await pool.query("SELECT raw_text FROM ideas WHERE id = $1 AND user_id = $2", [ideaId, userId]);
     if (res.rows.length > 0) rawText = res.rows[0].raw_text;
   } else {
-    const found = memoryDb.ideas.find((i) => i.id === ideaId);
+    const found = memoryDb.ideas.find((i) => i.id === ideaId && (i.userId || i.user_id) === userId);
     if (found) rawText = found.rawText;
   }
 
-  const { clusters } = await getResearchStatus(ideaId);
+  if (!rawText) throw new Error("Idea not found");
+
+  const { clusters } = await getResearchStatus(ideaId, userId);
   const insightsClient = getInsightsLayer2Client();
   const planData = await insightsClient.generateProjectPlan(rawText, clusters);
 
