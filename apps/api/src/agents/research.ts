@@ -85,7 +85,7 @@ export async function getResearchStatus(ideaId: string) {
 
   if (isDbConnected() && pool) {
     const res = await pool.query("SELECT * FROM research_clusters WHERE idea_id = $1", [ideaId]);
-    clusters = res.rows.map((row) => ({
+    clusters = res.rows.map((row: Record<string, any>) => ({
       id: row.id,
       ideaId: row.idea_id,
       type: row.cluster_type,
