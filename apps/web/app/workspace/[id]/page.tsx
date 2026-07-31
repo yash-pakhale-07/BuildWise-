@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Cluster, SearchResult } from "@buildwise/shared";
 import { BookOpen, Github, Globe, Sparkles, ArrowRight, Layers, ExternalLink, UserCheck, AlertTriangle } from "lucide-react";
+import { API_BASE_URL } from "../../../lib/config";
 
 export default function WorkspacePage() {
   const params = useParams();
@@ -14,8 +15,6 @@ export default function WorkspacePage() {
   const [clusters, setClusters] = useState<Cluster[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
-
   useEffect(() => {
     if (!ideaId) return;
 
@@ -23,9 +22,9 @@ export default function WorkspacePage() {
       try {
         setLoading(true);
         // Trigger background research job
-        await fetch(`${API_URL}/api/idea/${ideaId}/research`, { method: "POST" });
+        await fetch(`${API_BASE_URL}/api/idea/${ideaId}/research`, { method: "POST" });
         // Fetch current status and clusters
-        const res = await fetch(`${API_URL}/api/idea/${ideaId}/research/status`);
+        const res = await fetch(`${API_BASE_URL}/api/idea/${ideaId}/research/status`);
         if (!res.ok) throw new Error("Failed to fetch research status");
         const data = await res.json();
         setClusters(data.clusters || []);

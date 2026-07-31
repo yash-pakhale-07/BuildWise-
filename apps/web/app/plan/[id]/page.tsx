@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { ProjectPlan, MilestoneItem, DatasetItem, RepoItem } from "@buildwise/shared";
 import { Cpu, Github, GitPullRequest, ListChecks, Database, Code2, Sparkles, CheckCircle2, ExternalLink, ArrowUpRight } from "lucide-react";
+import { API_BASE_URL } from "../../../lib/config";
 
 export default function ProjectPlanPage() {
   const params = useParams();
@@ -15,15 +16,13 @@ export default function ProjectPlanPage() {
   const [scaffoldResult, setScaffoldResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
-
   useEffect(() => {
     if (!ideaId) return;
 
     async function loadPlan() {
       try {
         setLoading(true);
-        const res = await fetch(`${API_URL}/api/idea/${ideaId}/plan`, { method: "POST" });
+        const res = await fetch(`${API_BASE_URL}/api/idea/${ideaId}/plan`, { method: "POST" });
         if (!res.ok) throw new Error("Failed to generate project plan");
         const data = await res.json();
         setPlan(data);
@@ -41,7 +40,7 @@ export default function ProjectPlanPage() {
     if (!plan?.id) return;
     try {
       setScaffolding(true);
-      const res = await fetch(`${API_URL}/api/plan/${plan.id}/github-scaffold`, { method: "POST" });
+      const res = await fetch(`${API_BASE_URL}/api/plan/${plan.id}/github-scaffold`, { method: "POST" });
       if (!res.ok) throw new Error("Failed to scaffold GitHub repository");
       const data = await res.json();
       setScaffoldResult(data);
