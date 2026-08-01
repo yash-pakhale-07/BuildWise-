@@ -12,7 +12,7 @@
 
 const GEMINI_API_BASE =
   "https://generativelanguage.googleapis.com/v1beta/models";
-const DEFAULT_GEMINI_MODEL = "gemini-1.5-flash";
+const DEFAULT_GEMINI_MODEL = "gemini-2.5-flash";
 
 export class GeminiProviderError extends Error {
   public readonly statusCode?: number;
@@ -72,28 +72,19 @@ export async function generateGeminiResponse(prompt: string): Promise<string> {
   }
 
   if (!response.ok) {
-    const statusCode = response.status;
-    let safeMessage: string;
+    const errorBody = await response.text();
 
-    if (statusCode === 401) {
-      safeMessage = "Gemini API key is invalid or missing (HTTP 401).";
-    } else if (statusCode === 403) {
-      safeMessage = "Access to the Gemini API was denied (HTTP 403).";
-    } else if (statusCode === 429) {
-      safeMessage =
-        "Gemini API quota exhausted. Please try again later (HTTP 429).";
-    } else {
-      safeMessage = `Gemini API request failed (HTTP ${statusCode}).`;
-    }
+    console.error("========== GEMINI ERROR ==========");
+    console.error("Status:", response.status);
+    console.error("Response:", errorBody);
+    console.error("URL:", url);
+    console.error("==================================");
 
-    console.error("[Gemini] API returned an error", {
-      provider: "gemini",
-      model,
-      status: statusCode,
-    });
-    throw new GeminiProviderError(safeMessage, statusCode);
+    throw new GeminiProviderError(
+      `Gemini API request failed (HTTP ${response.status})`,
+      response.status
+    );
   }
-
   let body: unknown;
   try {
     body = await response.json();
