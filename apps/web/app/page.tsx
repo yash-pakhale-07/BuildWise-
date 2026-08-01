@@ -18,6 +18,7 @@ export default function OverviewPage() {
   const [ideaText, setIdeaText] = useState("");
   const [loading, setLoading] = useState(false);
   const [validationResult, setValidationResult] = useState<any>(null);
+  const [demandScore, setDemandScore] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleValidate = async (e: React.FormEvent) => {
@@ -34,6 +35,7 @@ export default function OverviewPage() {
           noveltyScore: 50,
           feasibilityNotes: foodWasteFeasibility,
         });
+        setDemandScore(null);
         setLoading(false);
       }, 500);
     } else {
@@ -50,6 +52,9 @@ export default function OverviewPage() {
           throw new Error("Novelty validation returned an invalid score");
         }
         setValidationResult(result);
+        // Capture demandScore from the validation sub-object (Gemini provider)
+        const ds = data.validation?.demandScore;
+        setDemandScore(Number.isInteger(ds) && ds >= 0 && ds <= 100 ? ds : null);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Novelty validation failed");
       } finally {
@@ -147,11 +152,19 @@ export default function OverviewPage() {
 
             <div className="glass-card p-4 rounded-xl flex items-center gap-4">
               <div className="w-14 h-14 rounded-full border-4 border-success flex items-center justify-center font-bold text-xl text-success">
-                92%
+                {demandScore !== null ? `${demandScore}%` : "—"}
               </div>
               <div>
                 <span className="text-xs text-fg-muted block font-medium">{t("labels.demandScore")}</span>
-                <span className="text-sm font-bold text-fg">Strong Academic Growth (+28%)</span>
+                <span className="text-sm font-bold text-fg">
+                  {demandScore !== null
+                    ? demandScore >= 75
+                      ? "Strong Research Demand"
+                      : demandScore >= 50
+                      ? "Moderate Research Demand"
+                      : "Emerging Research Area"
+                    : "Research Demand"}
+                </span>
               </div>
             </div>
           </div>
